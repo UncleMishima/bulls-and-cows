@@ -1,15 +1,14 @@
 /**
- * The {@code Application} class running
- * bulls and cows application
+ * The {@code Application} class
  *
- * @author Michael "Mishima" Sedov
+ * @author Mishima
  * @since 1.0.0
  */
 
 public class Application
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws Exception
     {
-        System.out.println("Hello there! Welcome to bulls and cows console game! >__<");
+        Game game = new Game();
     }
 }
