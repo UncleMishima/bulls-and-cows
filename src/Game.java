@@ -33,6 +33,8 @@ public class Game
                         .current()
                         .nextInt(BOTTOM, TOP)));
 
+        System.out.println("Computer number is: " + generatedNumber);
+
         gameStart();
     }
 
@@ -40,21 +42,55 @@ public class Game
     {
         do
         {
+            ++step;
             inputUserData();
             checkNumber();
+            printResult();
         }
-        while (generatedNumber.equals(userNumber));
+        while (!generatedNumber.equals(userNumber));
 
-        gameOver();
+        printResult();
     }
 
     public void checkNumber()
     {
-        //checking how many cows and bulls users number has
+        if (generatedNumber.equals(userNumber)) return;
+
+        int bullState = 0;
+        int cowState = 0;
+
+        int[] genNumber = Integer.toString(generatedNumber
+                .getNumber())
+                .chars()
+                .map(c -> c-'0')
+                .toArray();
+
+        int[] userNumber = Integer.toString(this.userNumber
+                .getNumber())
+                .chars()
+                .map(c -> c-'0')
+                .toArray();
+
+        for (int i = 0; i < Number.NUMBER_SIZE; i++)
+        {
+            if (genNumber[i] == userNumber[i]) ++bullState;
+            else
+            {
+                for (int j = 0; j < Number.NUMBER_SIZE; j++)
+                {
+                    if (genNumber[i] == userNumber[j]) ++cowState;
+                }
+            }
+        }
+
+        bull.setState(bullState);
+        cow.setState(cowState);
     }
 
     public void inputUserData()
     {
+        System.out.println();
+
         try
         {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -63,7 +99,7 @@ public class Game
         catch (IOException e) {}
     }
 
-    public void gameOver()
+    public void printResult()
     {
         System.out.println("Results");
         System.out.print("Step: " + step);
