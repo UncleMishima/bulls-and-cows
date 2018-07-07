@@ -1,7 +1,8 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.ArrayList;
+//import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * The {@code Game} class
@@ -12,8 +13,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Game
 {
-    public static final int TOP = 9999;
-    public static final int BOTTOM = 1000;
+    //public static final int TOP = 9999;
+    //public static final int BOTTOM = 1000;
 
     private static int step = 0;
 
@@ -28,10 +29,9 @@ public class Game
 
         bull = new Bull();
         cow = new Cow();
-        generatedNumber = new Number(Integer
-                .toString(ThreadLocalRandom
-                        .current()
-                        .nextInt(BOTTOM, TOP)));
+
+        generatedNumber = new Number();
+        generatedNumber.generateNumber();
 
         System.out.println("Computer number is: " + generatedNumber);
 
@@ -43,13 +43,13 @@ public class Game
         do
         {
             ++step;
+            bull.setState(0);
+            cow.setState(0);
             inputUserData();
             checkNumber();
             printResult();
         }
         while (!generatedNumber.equals(userNumber));
-
-        printResult();
     }
 
     public void checkNumber()
@@ -59,26 +59,17 @@ public class Game
         int bullState = 0;
         int cowState = 0;
 
-        int[] genNumber = Integer.toString(generatedNumber
-                .getNumber())
-                .chars()
-                .map(c -> c-'0')
-                .toArray();
-
-        int[] userNumber = Integer.toString(this.userNumber
-                .getNumber())
-                .chars()
-                .map(c -> c-'0')
-                .toArray();
+        final ArrayList<Integer> genNumber = generatedNumber.getNumber();
+        final ArrayList<Integer> usrNumber = userNumber.getNumber();
 
         for (int i = 0; i < Number.NUMBER_SIZE; i++)
         {
-            if (genNumber[i] == userNumber[i]) ++bullState;
+            if (genNumber.get(i).equals(usrNumber.get(i))) ++bullState;
             else
             {
                 for (int j = 0; j < Number.NUMBER_SIZE; j++)
                 {
-                    if (genNumber[i] == userNumber[j]) ++cowState;
+                    if (genNumber.get(i).equals(usrNumber.get(j))) ++cowState;
                 }
             }
         }

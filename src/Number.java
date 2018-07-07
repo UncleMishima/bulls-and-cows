@@ -1,7 +1,11 @@
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Random;
 
 /**
  * The {@code Number} class
+ *
  *
  * @author Mishima
  * @since 1.0.0
@@ -11,15 +15,41 @@ public class Number
 {
     public static final int NUMBER_SIZE = 4;
 
-    private final int number;
+    private ArrayList<Integer> number = new ArrayList<>();
+
+    public Number() {}
 
     public Number(String number)
     {
-        this.number = Integer.parseInt(number);
+        for (int i = 0; i < NUMBER_SIZE; i++)
+        {
+            this.number.add(number.charAt(i) - '0');
+        }
     }
 
-    int getNumber()
+    public void generateNumber()
     {
+        Random rand = new Random();
+
+        number.add(0, rand.nextInt(10));
+
+        for (int i = 1; i < NUMBER_SIZE; i++)
+        {
+            rand = new Random();
+            number.add(i, rand.nextInt(10));
+
+            for (int j = 0; j < number.size() - 1; j++)
+            {
+                if (number.get(i).equals(number.get(j)))
+                {
+                    number.remove(i);
+                    --i;
+                }
+            }
+        }
+    }
+
+    public ArrayList<Integer> getNumber() {
         return number;
     }
 
