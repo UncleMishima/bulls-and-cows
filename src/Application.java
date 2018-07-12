@@ -1,7 +1,9 @@
 /**
  * The {@code Application} class
+ * contains a {@link Application#main(String[])}
+ * function that simple running the game
  *
- * @author Mishima
+ * @author Michael Sedov
  * @since 1.0.0
  */
 

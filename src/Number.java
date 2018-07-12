@@ -1,13 +1,14 @@
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 
 /**
  * The {@code Number} class
+ * implements the number which generated
+ * by computer or entered by user. Each number consists
+ * of {@code NUMBER_SIZE} digits.
  *
- *
- * @author Mishima
+ * @author Michael Sedov
  * @since 1.0.0
  */
 
@@ -61,9 +62,9 @@ public class Number
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Number)) return false;
         Number number1 = (Number) o;
-        return number == number1.number;
+        return Objects.equals(number, number1.number);
     }
 
     @Override

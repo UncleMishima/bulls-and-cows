@@ -2,44 +2,41 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-//import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * The {@code Game} class
+ * implements logic of the game
  *
- * @author Mishima
+ * @author Michael Sedov
  * @since 1.0.0
  */
 
 public class Game
 {
-    //public static final int TOP = 9999;
-    //public static final int BOTTOM = 1000;
-
     private static int step = 0;
 
-    private Number generatedNumber;
+    private final Number generatedNumber;
     private Number userNumber;
     private Bull bull;
     private Cow cow;
 
     public Game()
     {
-        System.out.println("Hello there! Welcome to bulls and cows console game!");
-
         bull = new Bull();
         cow = new Cow();
 
         generatedNumber = new Number();
         generatedNumber.generateNumber();
 
-        System.out.println("Computer number is: " + generatedNumber);
+        System.out.println("Computer number is: " + generatedNumber.toString());
 
         gameStart();
     }
 
     public void gameStart()
     {
+        System.out.println("---------Hello there! Welcome to bulls and cows console game!---------");
+
         do
         {
             ++step;
@@ -50,11 +47,21 @@ public class Game
             printResult();
         }
         while (!generatedNumber.equals(userNumber));
+
+        System.out.println("Congratulations! You guessed the number "
+                + generatedNumber + " for "
+                + step + " steps!");
+
+        System.out.println("----------------------------------------------------------------------");
     }
 
     public void checkNumber()
     {
-        if (generatedNumber.equals(userNumber)) return;
+        if (generatedNumber.equals(userNumber))
+        {
+            bull.setState(4);
+            return;
+        }
 
         int bullState = 0;
         int cowState = 0;
@@ -85,6 +92,7 @@ public class Game
         try
         {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            System.out.print("Enter your Number: ");
             userNumber = new Number(reader.readLine());
         }
         catch (IOException e) {}
@@ -92,9 +100,8 @@ public class Game
 
     public void printResult()
     {
-        System.out.println("Results");
         System.out.print("Step: " + step);
         System.out.print("\tBulls: " + bull.getState());
-        System.out.print("\tCows: " + cow.getState());
+        System.out.println("\tCows: " + cow.getState());
     }
 }
