@@ -8,8 +8,17 @@
  * @version 1.0.0
  */
 
-public abstract class AbstractAnimal {
-    protected int state;
-    public abstract void setState(int state);
-    public abstract int getState();
+public class Animal {
+    private int state;
+
+    public Animal() {
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public int getState() {
+        return state;
+    }
 }
