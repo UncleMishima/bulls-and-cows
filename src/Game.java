@@ -11,8 +11,7 @@ import java.util.ArrayList;
  * @since 1.0.0
  */
 
-public class Game
-{
+public class Game {
     private static int step = 0;
 
     private final Number generatedNumber;
@@ -20,11 +19,9 @@ public class Game
     private Bull bull;
     private Cow cow;
 
-    public Game()
-    {
+    public Game() {
         bull = new Bull();
         cow = new Cow();
-
         generatedNumber = new Number();
         generatedNumber.generateNumber();
 
@@ -33,20 +30,17 @@ public class Game
         gameStart();
     }
 
-    public void gameStart()
-    {
+    public void gameStart() {
         System.out.println("---------Hello there! Welcome to bulls and cows console game!---------");
 
-        do
-        {
+        do {
             ++step;
             bull.setState(0);
             cow.setState(0);
             inputUserData();
             checkNumber();
             printResult();
-        }
-        while (!generatedNumber.equals(userNumber));
+        } while (!generatedNumber.equals(userNumber));
 
         System.out.println("Congratulations! You guessed the number "
                 + generatedNumber + " for "
@@ -55,10 +49,8 @@ public class Game
         System.out.println("----------------------------------------------------------------------");
     }
 
-    public void checkNumber()
-    {
-        if (generatedNumber.equals(userNumber))
-        {
+    public void checkNumber() {
+        if (generatedNumber.equals(userNumber)) {
             bull.setState(4);
             return;
         }
@@ -69,14 +61,14 @@ public class Game
         final ArrayList<Integer> genNumber = generatedNumber.getNumber();
         final ArrayList<Integer> usrNumber = userNumber.getNumber();
 
-        for (int i = 0; i < Number.NUMBER_SIZE; i++)
-        {
-            if (genNumber.get(i).equals(usrNumber.get(i))) ++bullState;
-            else
-            {
-                for (int j = 0; j < Number.NUMBER_SIZE; j++)
-                {
-                    if (genNumber.get(i).equals(usrNumber.get(j))) ++cowState;
+        for (int i = 0; i < Number.NUMBER_SIZE; i++) {
+            if (genNumber.get(i).equals(usrNumber.get(i))) {
+                ++bullState;
+            } else {
+                for (int j = 0; j < Number.NUMBER_SIZE; j++) {
+                    if (genNumber.get(i).equals(usrNumber.get(j))) {
+                        ++cowState;
+                    }
                 }
             }
         }
@@ -85,21 +77,19 @@ public class Game
         cow.setState(cowState);
     }
 
-    public void inputUserData()
-    {
+    public void inputUserData() {
         System.out.println();
 
-        try
-        {
+        try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             System.out.print("Enter your Number: ");
             userNumber = new Number(reader.readLine());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        catch (IOException e) {}
     }
 
-    public void printResult()
-    {
+    public void printResult() {
         System.out.print("Step: " + step);
         System.out.print("\tBulls: " + bull.getState());
         System.out.println("\tCows: " + cow.getState());

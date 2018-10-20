@@ -8,11 +8,8 @@
  * @version 1.0.0
  */
 
-public abstract class AbstractAnimal
-{
+public abstract class AbstractAnimal {
     protected int state;
-
     public abstract void setState(int state);
-
     public abstract int getState();
 }

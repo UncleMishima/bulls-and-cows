@@ -5,8 +5,8 @@
  * @since 1.0.0
  */
 
-public class Cow extends AbstractAnimal
-{
+
+public class Cow extends AbstractAnimal {
     @Override
     public void setState(int state)
     {

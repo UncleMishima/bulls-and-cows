@@ -12,37 +12,30 @@ import java.util.Random;
  * @since 1.0.0
  */
 
-public class Number
-{
+public class Number {
     public static final int NUMBER_SIZE = 4;
 
     private ArrayList<Integer> number = new ArrayList<>();
 
     public Number() {}
 
-    public Number(String number)
-    {
-        for (int i = 0; i < NUMBER_SIZE; i++)
-        {
+    public Number(String number) {
+        for (int i = 0; i < NUMBER_SIZE; i++) {
             this.number.add(number.charAt(i) - '0');
         }
     }
 
-    public void generateNumber()
-    {
+    public void generateNumber() {
         Random rand = new Random();
 
         number.add(0, rand.nextInt(10));
 
-        for (int i = 1; i < NUMBER_SIZE; i++)
-        {
+        for (int i = 1; i < NUMBER_SIZE; i++) {
             rand = new Random();
             number.add(i, rand.nextInt(10));
 
-            for (int j = 0; j < number.size() - 1; j++)
-            {
-                if (number.get(i).equals(number.get(j)))
-                {
+            for (int j = 0; j < number.size() - 1; j++) {
+                if (number.get(i).equals(number.get(j))) {
                     number.remove(i);
                     --i;
                 }
