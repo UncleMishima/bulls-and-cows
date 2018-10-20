@@ -16,12 +16,11 @@ public class Game {
 
     private final Number generatedNumber;
     private Number userNumber;
-    private Bull bull;
-    private Cow cow;
+    private Animal bull, cow;
 
     public Game() {
-        bull = new Bull();
-        cow = new Cow();
+        bull = new Animal();
+        cow = new Animal();
         generatedNumber = new Number();
         generatedNumber.generateNumber();
 
@@ -35,8 +34,8 @@ public class Game {
 
         do {
             ++step;
-            bull.setState(0);
-            cow.setState(0);
+            bull.setAnimalState(0);
+            cow.setAnimalState(0);
             inputUserData();
             checkNumber();
             printResult();
@@ -51,7 +50,7 @@ public class Game {
 
     public void checkNumber() {
         if (generatedNumber.equals(userNumber)) {
-            bull.setState(4);
+            bull.setAnimalState(4);
             return;
         }
 
@@ -73,8 +72,8 @@ public class Game {
             }
         }
 
-        bull.setState(bullState);
-        cow.setState(cowState);
+        bull.setAnimalState(bullState);
+        cow.setAnimalState(cowState);
     }
 
     public void inputUserData() {
@@ -91,7 +90,7 @@ public class Game {
 
     public void printResult() {
         System.out.print("Step: " + step);
-        System.out.print("\tBulls: " + bull.getState());
-        System.out.println("\tCows: " + cow.getState());
+        System.out.print("\tBulls: " + bull.getAnimalState());
+        System.out.println("\tCows: " + cow.getAnimalState());
     }
 }

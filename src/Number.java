@@ -49,7 +49,7 @@ public class Number {
 
     @Override
     public String toString() {
-        return "Number: " + number;
+        return String.valueOf(number);
     }
 
     @Override
